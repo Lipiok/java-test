@@ -1,0 +1,89 @@
+package com.diegopinheiro.programacao2;
+
+import java.util.Scanner;
+
+public class List01 {
+	Scanner in = new Scanner (System.in); 
+
+	public int[] build_vector_repeat(int i, int j) {
+		int result [] = new int [i];
+		for(int c = 0; c<result.length; c++) {
+			result[c] = j;
+		}
+		return result;
+	}
+
+	public int[] build_vector_sequence(int i, int j) {
+		int vet1[] = new int[i];		
+		for(int c = 0; c < i; c++) {
+			vet1[c] = j;
+			j++;
+		}
+		return vet1;
+	}
+
+	public int dot_product(int[] a, int[] b)throws Exception {
+		int protudct = 0;
+		if(a.length != b.length) {
+			throw new Exception("invalido"); 
+		}
+		for(int c = 0; c < a.length; c++) {
+			protudct = (a[c] * b[c]) + protudct;			
+		}
+			
+		return protudct;
+	}
+
+	public boolean isPalindrome(int[] a) {
+		int i = 0;
+		int check = a.length -1;
+		while(check > i) {
+			if(a[check] != a[i]) {
+				return false;
+			}
+			i++;
+			check--;
+		}
+		return true;
+	}
+	
+	public double[] calculateCablesSupportRod(int numSteelCables, double maxCableHeught, double halfBridgeLenght) {
+		double[] vet = new double[numSteelCables];
+		double hypotenuse = 0;
+		
+		if(numSteelCables == 1) {
+			hypotenuse = Math.sqrt(Math.pow(halfBridgeLenght, 2)+ Math.pow(maxCableHeught, 2));
+			vet[0] = hypotenuse;			
+		}
+		
+		if(numSteelCables == 2) {
+			hypotenuse = Math.sqrt(Math.pow(halfBridgeLenght, 2) + Math.pow(maxCableHeught, 2));
+			vet[0] = hypotenuse;
+			hypotenuse = Math.sqrt(Math.pow(halfBridgeLenght/2, 2) + Math.pow(maxCableHeught/2, 2));
+			vet[1] = hypotenuse;
+		}
+		return vet;
+	}
+
+	public double calculateCableBridge(float bridgeLenght, int numSteelCables) {
+		double halfBridgeLenght = 0;
+		double maxCableHeight = 0;
+		double soma = 0;
+		double [] cables = new double [numSteelCables];
+		halfBridgeLenght = bridgeLenght/2;
+		maxCableHeight = 1/20 * halfBridgeLenght;
+		cables = calculateCablesSupportRod(numSteelCables, maxCableHeight, halfBridgeLenght);
+		
+		for(int lenght = 0; lenght < numSteelCables; lenght++) {
+			soma = soma + cables[lenght];
+		}
+		soma = soma * 4;
+		
+		return soma;
+	}
+	
+	
+	
+
+}
+
